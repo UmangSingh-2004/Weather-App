@@ -26,16 +26,11 @@ public class WeatherAppGui extends JFrame {
     }
 
     private void addGuiComponents(){
-        // search field
+    
         JTextField searchTextField = new JTextField();
-
-        // set the location and size of our component
         searchTextField.setBounds(15, 15, 351, 45);
-
-        // change the font style and size
         searchTextField.setFont(new Font("Cambria Math", Font.BOLD, 24));
         searchTextField.setHorizontalAlignment(JTextField.CENTER);
-
         add(searchTextField);
 
         // weather image
@@ -80,8 +75,6 @@ public class WeatherAppGui extends JFrame {
         windspeedText.setBounds(310, 500, 85, 55);
         windspeedText.setFont(new Font("Dialog", Font.PLAIN, 16));
         add(windspeedText);
-
-        // search button
         JButton weatherButton = new JButton(loadImage("src/assets/weather.png"));
 
         // change the cursor to a hand cursor when hovering over this button
@@ -90,23 +83,12 @@ public class WeatherAppGui extends JFrame {
         weatherButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // get location from user
-                String userInput = searchTextField.getText();
-
-                // validate input - remove whitespace to ensure non-empty text
+                String userInput = searchTextField.getText()
                 if(userInput.replaceAll("\\s", "").length() <= 0){
                     return;
                 }
-
-                // retrieve weather data
                 weatherData = WeatherApp.getWeatherData(userInput);
-
-                // update gui
-
-                // update weather image
                 String weatherCondition = (String) weatherData.get("weather_condition");
-
-                // depending on the condition, we will update the weather image that corresponds with the condition
                 switch(weatherCondition){
                     case "Clear":
                         weatherConditionImage.setIcon(loadImage("src/assets/clear.png"));
